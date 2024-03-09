@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 32px;
+  column-gap: 48px;
+}
+.imageContainer {
+  width: 240px;
+}
+
+.actorDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+}
+.name {
+  font-weight: 700;
+}
+.character {
+  font-weight: 400;
+}

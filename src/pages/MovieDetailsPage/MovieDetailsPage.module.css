@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+  margin-bottom: 48px;
+}
+.poster {
+  flex-shrink: 0;
+}
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+.overview {
+  margin-bottom: 24px;
+}
+.genres {
+  margin-bottom: 24px;
+}
+.extraInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.votes {
+  font-size: 14px;
+}
+
+.navigation {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.link {
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  transition: all var(--duration) var(--transition-function);
+}
+.link:hover {
+  border-color: var(--red);
+}
+.isActive {
+  color: var(--red);
+  border-color: var(--red);
+}

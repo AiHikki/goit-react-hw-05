@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.backLink {
+  color: var(--white);
+  background-color: var(--gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  line-height: 0;
+  transition: all var(--duration) var(--transition-function);
+}
+.backLink:hover {
+  background-color: var(--red);
+}
