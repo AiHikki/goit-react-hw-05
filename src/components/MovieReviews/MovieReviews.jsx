@@ -49,20 +49,22 @@ const MovieReviews = () => {
                       className={c.avatar}
                     />
                     <div>
-                      <span>@{username}</span>
+                      <span className={c.username}>@{username}</span>
                     </div>
                   </div>
 
                   <StarRate rating={rating} />
                 </div>
-                <p className={c.comment}>{content}</p>
-                <span className={c.date}>{formatDate(created_at)}</span>
+                <div className={c.commentContainer}>
+                  <p className={c.comment}>{content}</p>
+                  <span className={c.date}>{formatDate(created_at)}</span>
+                </div>
               </li>
             )
           )}
         </ul>
       ) : (
-        <div>There aren&apos;t any reviews yet</div>
+        <div>There aren&apos;t any reviews yet.</div>
       )}
       <Toaster />
     </div>

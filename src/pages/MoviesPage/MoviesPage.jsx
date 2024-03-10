@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import { fetchData } from '../../movies-api';
 import toast, { Toaster } from 'react-hot-toast';
@@ -15,12 +15,13 @@ const MoviesPage = () => {
   const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
+    if (!query) return;
     const getData = async () => {
       try {
         setIsLoading(true);
         const { results } = await fetchData('search/movie', { query });
-        if (results.length === 0 && query) {
-          toast("Sorry, we couldn't find anything", { id: 'notFound' });
+        if (results.length === 0 && query !== '') {
+          toast("Sorry, we couldn't find anything", { id: 'notFound', duration: 2000 });
           return;
         }
         setMovies(results);
@@ -33,10 +34,6 @@ const MoviesPage = () => {
     getData();
   }, [query]);
 
-  const filteredMovies = useMemo(() => {
-    return movies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase()));
-  }, [movies, query]);
-
   return (
     <div>
       <p className={c.text}>
@@ -45,8 +42,8 @@ const MoviesPage = () => {
         Start exploring now!
       </p>
       <SearchBox />
-      {movies.length > 0 && <MovieList movies={filteredMovies} />}
-      {query && isLoading && <Loader />}
+      {movies.length > 0 && <MovieList movies={movies} />}
+      {isLoading && <Loader />}
       <Toaster />
     </div>
   );
