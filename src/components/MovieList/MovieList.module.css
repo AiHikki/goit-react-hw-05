@@ -1,6 +1,33 @@
-.list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 64px;
+.listItem {
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .listItem {
+    width: 100%;
+  }
+  .listItem:not(:last-child) {
+    margin-bottom: 40px;
+  }
+}
+@media (min-width: 768px) {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 32px;
+  }
+
+  .listItem {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+}
+
+@media (min-width: 1440px) {
+  .list {
+    column-gap: 32px;
+    row-gap: 48px;
+  }
+  .listItem {
+    flex-basis: calc((100% - 32px * 2) / 3);
+  }
 }

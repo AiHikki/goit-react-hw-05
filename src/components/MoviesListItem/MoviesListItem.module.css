@@ -1,18 +1,13 @@
 .desc {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 8px;
-  width: 500px;
-  padding: 16px 12px;
+  padding: 8px 6px;
 }
 .title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 .rating {
   display: flex;

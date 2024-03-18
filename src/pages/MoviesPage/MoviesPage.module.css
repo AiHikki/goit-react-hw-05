@@ -1,7 +1,13 @@
 .text {
   font-weight: 500;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .logo {
   color: var(--red);
+}
+
+@media (min-width: 1440px) {
+  .text {
+    margin-bottom: 32px;
+  }
 }

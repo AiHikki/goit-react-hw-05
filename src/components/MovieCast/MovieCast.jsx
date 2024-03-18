@@ -30,7 +30,7 @@ const MovieCast = () => {
     <div>
       <ul className={c.list}>
         {credits?.map(({ id, name, character, profile_path }) => (
-          <li key={id}>
+          <li className={c.listItem} key={id}>
             <div className={c.imageContainer}>
               <img src={createImgURL(profile_path)} alt={name} />
             </div>

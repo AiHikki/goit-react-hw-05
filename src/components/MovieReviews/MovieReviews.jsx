@@ -32,7 +32,7 @@ const MovieReviews = () => {
       {isLoading && <Loader />}
 
       {reviews.length > 0 ? (
-        <ul className={c.list}>
+        <ul>
           {reviews?.map(
             ({
               id,
@@ -40,24 +40,24 @@ const MovieReviews = () => {
               author_details: { name, username, rating, avatar_path },
               created_at,
             }) => (
-              <li key={id}>
-                <div className={c.userInfoContainer}>
-                  <div className={c.userInfo}>
+              <li className={c.listItem} key={id}>
+                <div className={c.userInfo}>
+                  <div className={c.user}>
                     <img
                       src={createImgURL(avatar_path)}
                       alt={`${name} avatar`}
                       className={c.avatar}
                     />
-                    <div>
-                      <span className={c.username}>@{username}</span>
-                    </div>
+                    <div className={c.username}>@{username}</div>
                   </div>
-
-                  <StarRate rating={rating} />
+                  <div>
+                    <StarRate rating={rating} />
+                  </div>
                 </div>
+
                 <div className={c.commentContainer}>
                   <p className={c.comment}>{content}</p>
-                  <span className={c.date}>{formatDate(created_at)}</span>
+                  <div className={c.date}>{formatDate(created_at)}</div>
                 </div>
               </li>
             )

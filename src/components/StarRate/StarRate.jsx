@@ -11,11 +11,11 @@ const StarRate = ({ rating }) => {
       {[...Array(10)].map((_, i) => (
         <div key={i}>
           {i + 1 <= roundedRating ? (
-            <FaStar />
+            <FaStar className={c.star} />
           ) : i + 0.5 === roundedRating ? (
-            <FaStarHalfAlt />
+            <FaStarHalfAlt className={c.star} />
           ) : (
-            <FaRegStar />
+            <FaRegStar className={c.star} />
           )}
         </div>
       ))}

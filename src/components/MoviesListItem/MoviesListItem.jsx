@@ -5,8 +5,8 @@ import c from './MoviesListItem.module.css';
 const MoviesListItem = ({ movie: { poster_path, title, vote_average, vote_count } }) => {
   return (
     <div>
-      <div className={c.poster}>
-        <img src={createImgURL(poster_path)} alt={`${title} poster`} />
+      <div>
+        <img className={c.poster} src={createImgURL(poster_path)} alt={`${title} poster`} />
       </div>
       <div className={c.desc}>
         <p className={c.title}>{title}</p>

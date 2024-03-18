@@ -4,3 +4,6 @@
   line-height: 0;
   color: var(--gold);
 }
+.star {
+  width: 14px;
+}

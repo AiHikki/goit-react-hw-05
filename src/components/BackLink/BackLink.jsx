@@ -1,16 +1,13 @@
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoArrowBackCircle } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import c from './BackLink.module.css';
 
 const BackLink = ({ to }) => {
   return (
-    <div className={c.wrapper}>
+    <div>
       <Link to={to}>
-        <div className={c.backLink}>
-          <IoIosArrowBack size={32} color="white" />
-        </div>
+        <IoArrowBackCircle color="white" size={36} />
       </Link>
-      <span>Back</span>
     </div>
   );
 };

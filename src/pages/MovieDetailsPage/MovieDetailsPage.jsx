@@ -42,19 +42,21 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <BackLink to={backLinkRef.current} />
-      <div className={c.container}>
+      <div className={c.movieInfoContainer}>
         <div className={c.poster}>
           <img src={createImgURL(movie?.poster_path)} alt={`${movie?.title} poster`} />
         </div>
-        <div>
+        <div className={c.movieDesc}>
           <p className={c.title}>{movie?.title}</p>
           <p className={c.overview}>{movie?.overview}</p>
           <div className={c.genres}>
-            <span>Genres: </span>
+            <span className={c.bold}>Genres: </span>
             {movie?.genres.map(({ name }) => name).join(', ')}
           </div>
           <div className={c.extraInfo}>
-            <p>Release date: {movie?.release_date}</p>
+            <div className={c.date}>
+              <span className={c.bold}>Release date: </span> {movie?.release_date}
+            </div>
             <div className={c.rating}>
               <StarRate rating={movie?.vote_average} />
               <div className={c.votes}>{movie?.vote_count}</div>

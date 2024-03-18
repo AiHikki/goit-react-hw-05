@@ -1,23 +1,37 @@
-.list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  row-gap: 32px;
-  column-gap: 48px;
-}
-.imageContainer {
-  width: 240px;
-}
-
 .actorDesc {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 12px;
+  padding: 8px 6px;
 }
 .name {
   font-weight: 700;
 }
-.character {
-  font-weight: 400;
+
+@media (max-width: 767px) {
+  .listItem:not(:last-child) {
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 32px;
+  }
+  .listItem {
+    flex-basis: calc((100% - 24px * 2) / 3);
+  }
+}
+
+@media (min-width: 1440px) {
+  .list {
+    column-gap: 32px;
+    row-gap: 48px;
+  }
+  .listItem {
+    flex-basis: calc((100% - 32px * 4) / 5);
+  }
 }
