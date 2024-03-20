@@ -1,35 +1,33 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchData } from '../../movies-api';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 import { createImgURL } from '../../utils';
 import c from './MovieCast.module.css';
+import { useDispatch } from 'react-redux';
+import { fetchMovieById } from '../../redux/moviesOps';
 
 const MovieCast = () => {
-  const [credits, setCredits] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [cast, setCast] = useState([]);
   const { movieId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getData = async () => {
+    const getMovieCredits = async () => {
       try {
-        setIsLoading(true);
-        const { cast } = await fetchData(`movie/${movieId}/credits`);
-        setCredits(cast);
+        const { cast } = await dispatch(fetchMovieById(`${movieId}/credits`)).unwrap();
+        setCast(cast);
       } catch (error) {
-        toast.error('Oops! Something went wrong. Try reloading the page', { id: 'error' });
-      } finally {
-        setIsLoading(false);
+        console.log(error);
       }
     };
-    getData();
-  }, [movieId]);
+    getMovieCredits();
+  }, [dispatch, movieId]);
 
   return (
     <div>
       <ul className={c.list}>
-        {credits?.map(({ id, name, character, profile_path }) => (
+        {cast?.map(({ id, name, character, profile_path }) => (
           <li className={c.listItem} key={id}>
             <div className={c.imageContainer}>
               <img src={createImgURL(profile_path)} alt={name} />
@@ -41,7 +39,7 @@ const MovieCast = () => {
           </li>
         ))}
       </ul>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <Toaster />
     </div>
   );

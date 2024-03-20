@@ -1,34 +1,22 @@
-import { useEffect, useState } from 'react';
-import { fetchData } from '../../movies-api';
+import { useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import c from './HomePage.module.css';
+import { useDispatch } from 'react-redux';
+import { fetchMovies } from '../../redux/moviesOps';
 
 const HomePage = () => {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        setIsLoading(true);
-        const { results } = await fetchData('trending/movie/day');
-        setMovies(results);
-      } catch (error) {
-        toast.error('Oops! Something went wrong. Try reloading the page', { id: 'error' });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
-  }, []);
+    dispatch(fetchMovies({ path: 'trending/movie/day' }));
+  }, [dispatch]);
 
   return (
     <div>
       <h1 className={c.title}>Discover Today&apos;s Hottest Hits</h1>
-      <MovieList movies={movies} />
-      {isLoading && <Loader />}
+      <MovieList />
       <Toaster />
     </div>
   );

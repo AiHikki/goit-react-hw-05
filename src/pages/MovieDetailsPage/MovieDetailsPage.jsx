@@ -1,6 +1,5 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
-import { fetchData } from '../../movies-api';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../../components/Loader/Loader';
 import { createImgURL } from '../../utils';
@@ -8,6 +7,8 @@ import StarRate from '../../components/StarRate/StarRate';
 import BackLink from '../../components/BackLink/BackLink';
 import c from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
+import { useDispatch } from 'react-redux';
+import { fetchMovieById } from '../../redux/moviesOps';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(c.link, isActive && c.isActive);
@@ -18,26 +19,19 @@ const MovieDetailsPage = () => {
   const location = useLocation();
   const backLinkRef = useRef(location.state ?? '/');
   const [movie, setMovie] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getMovieById = async () => {
+    const getMovie = async () => {
       try {
-        setIsLoading(true);
-        const data = await fetchData(`movie/${movieId}`);
-        setMovie(data);
+        const payload = await dispatch(fetchMovieById(movieId)).unwrap();
+        setMovie(payload);
       } catch (error) {
-        toast.error('Oops! Something went wrong. Try reloading the page', { id: 'error' });
-      } finally {
-        setIsLoading(false);
+        console.log(error);
       }
     };
-    getMovieById();
-  }, [movieId]);
-
-  if (!movie) {
-    return;
-  }
+    getMovie();
+  }, [dispatch, movieId]);
 
   return (
     <div>
@@ -51,7 +45,7 @@ const MovieDetailsPage = () => {
           <p className={c.overview}>{movie?.overview}</p>
           <div className={c.genres}>
             <span className={c.bold}>Genres: </span>
-            {movie?.genres.map(({ name }) => name).join(', ')}
+            {movie?.genres?.map(({ name }) => name).join(', ')}
           </div>
           <div className={c.extraInfo}>
             <div className={c.date}>
@@ -80,7 +74,6 @@ const MovieDetailsPage = () => {
         </Suspense>
       </div>
 
-      {isLoading && <Loader />}
       <Toaster />
     </div>
   );

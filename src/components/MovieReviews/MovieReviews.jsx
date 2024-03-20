@@ -1,36 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchData } from '../../movies-api';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 import { createImgURL, formatDate } from '../../utils';
 import StarRate from '../StarRate/StarRate';
 import c from './MovieReviews.module.css';
+import { useDispatch } from 'react-redux';
+import { fetchMovieById } from '../../redux/moviesOps';
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getData = async () => {
+    const getMovieCredits = async () => {
       try {
-        setIsLoading(true);
-        const { results } = await fetchData(`movie/${movieId}/reviews`);
+        const { results } = await dispatch(fetchMovieById(`${movieId}/reviews`)).unwrap();
         setReviews(results);
       } catch (error) {
-        toast.error('Oops! Something went wrong. Try reloading the page', { id: 'error' });
-      } finally {
-        setIsLoading(false);
+        console.log(error);
       }
     };
-    getData();
-  }, [movieId]);
+    getMovieCredits();
+  }, [dispatch, movieId]);
 
   return (
     <div>
-      {isLoading && <Loader />}
-
       {reviews.length > 0 ? (
         <ul>
           {reviews?.map(

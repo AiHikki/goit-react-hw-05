@@ -1,5 +1,6 @@
 import defaultImg from './img/default.jpg';
-import { imgBaseURL } from './movies-api';
+
+export const imgBaseURL = 'https://image.tmdb.org/t/p/w500';
 
 export const createImgURL = url => {
   return url ? imgBaseURL + url : defaultImg;
