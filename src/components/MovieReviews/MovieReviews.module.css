@@ -1,15 +1,22 @@
 .listItem:not(:last-child) {
   margin-bottom: 40px;
 }
+
 .userInfo {
-  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 .user {
   display: flex;
   align-items: center;
   gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 8px;
 }
-
 .avatar {
   width: 32px;
   height: 32px;
@@ -19,30 +26,20 @@
 .username {
   font-weight: 600;
   font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .commentContainer {
   padding-left: 12px;
 }
-.comment {
-  margin-bottom: 8px;
-}
+
 .date {
   font-size: 14px;
   color: var(--smoke);
-  display: flex;
-  justify-content: flex-end;
+  flex-shrink: 0;
 }
 
-@media (max-width: 767px) {
-  .user {
-    margin-bottom: 8px;
-  }
-}
-
-@media (min-width: 768px) {
-  .userInfo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.rating {
+  margin-bottom: 12px;
 }

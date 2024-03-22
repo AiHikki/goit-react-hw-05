@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import Loader from '../Loader/Loader';
 import { createImgURL, formatDate } from '../../utils';
 import StarRate from '../StarRate/StarRate';
 import c from './MovieReviews.module.css';
@@ -19,15 +18,14 @@ const MovieReviews = () => {
         const { results } = await dispatch(fetchMovieById(`${movieId}/reviews`)).unwrap();
         setReviews(results);
       } catch (error) {
-        console.log(error);
+        toast.error('Oops... something went wrong.', { id: 'error' });
       }
     };
     getMovieCredits();
   }, [dispatch, movieId]);
-
   return (
     <div>
-      {reviews.length > 0 ? (
+      {reviews?.length > 0 ? (
         <ul>
           {reviews?.map(
             ({
@@ -46,14 +44,15 @@ const MovieReviews = () => {
                     />
                     <div className={c.username}>@{username}</div>
                   </div>
-                  <div>
-                    <StarRate rating={rating} />
-                  </div>
+
+                  <div className={c.date}>{formatDate(created_at)}</div>
+                </div>
+                <div className={c.rating}>
+                  <StarRate rating={rating} />
                 </div>
 
                 <div className={c.commentContainer}>
-                  <p className={c.comment}>{content}</p>
-                  <div className={c.date}>{formatDate(created_at)}</div>
+                  <p>{content}</p>
                 </div>
               </li>
             )

@@ -19,8 +19,8 @@
   --gray: #585858;
   --gold: #ffd701;
   --smoke: #8d8d8d;
-  --duration: 150ms;
-  --transition-function: cubic-bezier(0.94, 0.28, 0.23, 0.56);
+  --duration: 250ms;
+  --transition-function: ease-in-out;
 }
 
 *,

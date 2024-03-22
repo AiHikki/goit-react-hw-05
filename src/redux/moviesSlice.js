@@ -5,7 +5,10 @@ const handlePending = state => {
   state.loading = true;
   state.error = false;
 };
-const handleRejected = state => (state.error = true);
+const handleRejected = state => {
+  state.loading = false;
+  state.error = true;
+};
 
 const slice = createSlice({
   name: 'movies',
@@ -16,7 +19,10 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchMovies.pending, handlePending)
+      .addCase(fetchMovies.pending, state => {
+        state.items = [];
+        handlePending(state);
+      })
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
@@ -33,3 +39,5 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const selectMovies = state => state.movies.items;
+export const selectLoading = state => state.movies.loading;
+export const selectError = state => state.movies.error;

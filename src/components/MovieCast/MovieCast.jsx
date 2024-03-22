@@ -18,7 +18,7 @@ const MovieCast = () => {
         const { cast } = await dispatch(fetchMovieById(`${movieId}/credits`)).unwrap();
         setCast(cast);
       } catch (error) {
-        console.log(error);
+        toast.error('Oops... something went wrong.', { id: 'error' });
       }
     };
     getMovieCredits();
@@ -39,7 +39,6 @@ const MovieCast = () => {
           </li>
         ))}
       </ul>
-      {/* {isLoading && <Loader />} */}
       <Toaster />
     </div>
   );

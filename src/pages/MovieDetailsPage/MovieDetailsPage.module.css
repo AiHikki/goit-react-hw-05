@@ -45,8 +45,11 @@
   color: var(--red);
   border-color: var(--red);
 }
-.link:hover {
-  border-color: var(--red);
+
+@media (hover: hover) {
+  .link:hover {
+    border-color: var(--red);
+  }
 }
 
 @media (max-width: 1439px) {

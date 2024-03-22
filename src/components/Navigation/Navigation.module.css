@@ -1,8 +1,9 @@
-.header {
+.navWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 .logo {
   color: var(--red);
@@ -12,13 +13,13 @@
   gap: 16px;
 }
 .link {
+  padding-top: 16px;
+  padding-bottom: 16px;
   font-size: 18px;
   font-weight: 600;
   transition: all var(--duration) var(--transition-function);
 }
-.link:hover {
-  color: var(--red);
-}
+
 .isActive {
   position: relative;
   color: var(--red);
@@ -28,7 +29,24 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -6px;
+  bottom: 0;
   height: 3px;
   background-color: var(--red);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--red);
+  }
+}
+
+@media (min-width: 1440px) {
+  .navWrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .link {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
 }

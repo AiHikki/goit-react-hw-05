@@ -3,6 +3,12 @@
   justify-content: center;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 32px;
   margin-top: 48px;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .notFound {
+    font-size: 28px;
+  }
 }

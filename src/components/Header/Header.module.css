@@ -1,0 +1,13 @@
+.header {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: transform var(--duration) var(--transition-function);
+  z-index: 999;
+}
+
+.hidden {
+  transform: translateY(-100%);
+}

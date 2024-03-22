@@ -19,7 +19,7 @@ export const fetchMovies = createAsyncThunk(
       });
       return data.results;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -29,6 +29,6 @@ export const fetchMovieById = createAsyncThunk('movies/fetchMovieById', async (p
     const { data } = await axios.get(`movie/${path}`);
     return data;
   } catch (error) {
-    thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });

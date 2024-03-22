@@ -1,7 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import Loader from '../../components/Loader/Loader';
 import { createImgURL } from '../../utils';
 import StarRate from '../../components/StarRate/StarRate';
 import BackLink from '../../components/BackLink/BackLink';
@@ -9,6 +8,7 @@ import c from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { fetchMovieById } from '../../redux/moviesOps';
+import PageLoader from '../../components/PageLoader/PageLoader';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(c.link, isActive && c.isActive);
@@ -27,7 +27,7 @@ const MovieDetailsPage = () => {
         const payload = await dispatch(fetchMovieById(movieId)).unwrap();
         setMovie(payload);
       } catch (error) {
-        console.log(error);
+        toast.error('Oops... something went wrong.', { id: 'error' });
       }
     };
     getMovie();
@@ -69,7 +69,7 @@ const MovieDetailsPage = () => {
       </nav>
 
       <div>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<PageLoader />}>
           <Outlet />
         </Suspense>
       </div>
