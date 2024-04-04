@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { createImgURL, formatDate } from '../../utils';
 import StarRate from '../StarRate/StarRate';
 import c from './MovieReviews.module.css';
 import { useDispatch } from 'react-redux';
-import { fetchMovieById } from '../../redux/moviesOps';
+import { fetchMovieById } from '../../redux/movies/operations';
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -18,7 +18,7 @@ const MovieReviews = () => {
         const { results } = await dispatch(fetchMovieById(`${movieId}/reviews`)).unwrap();
         setReviews(results);
       } catch (error) {
-        toast.error('Oops... something went wrong.', { id: 'error' });
+        toast.error('Oops... Something went wrong.', { id: 'error' });
       }
     };
     getMovieCredits();
@@ -61,7 +61,6 @@ const MovieReviews = () => {
       ) : (
         <div>There aren&apos;t any reviews yet.</div>
       )}
-      <Toaster />
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 import { createImgURL } from '../../utils';
 import c from './MovieCast.module.css';
 import { useDispatch } from 'react-redux';
-import { fetchMovieById } from '../../redux/moviesOps';
+import { fetchMovieById } from '../../redux/movies/operations';
 
 const MovieCast = () => {
   const [cast, setCast] = useState([]);
@@ -18,7 +18,7 @@ const MovieCast = () => {
         const { cast } = await dispatch(fetchMovieById(`${movieId}/credits`)).unwrap();
         setCast(cast);
       } catch (error) {
-        toast.error('Oops... something went wrong.', { id: 'error' });
+        toast.error('Oops... Something went wrong.', { id: 'error' });
       }
     };
     getMovieCredits();
@@ -39,7 +39,6 @@ const MovieCast = () => {
           </li>
         ))}
       </ul>
-      <Toaster />
     </div>
   );
 };

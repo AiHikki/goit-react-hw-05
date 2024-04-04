@@ -1,13 +1,13 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { createImgURL } from '../../utils';
 import StarRate from '../../components/StarRate/StarRate';
 import BackLink from '../../components/BackLink/BackLink';
 import c from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { fetchMovieById } from '../../redux/moviesOps';
+import { fetchMovieById } from '../../redux/movies/operations';
 import PageLoader from '../../components/PageLoader/PageLoader';
 
 const buildLinkClass = ({ isActive }) => {
@@ -27,7 +27,7 @@ const MovieDetailsPage = () => {
         const payload = await dispatch(fetchMovieById(movieId)).unwrap();
         setMovie(payload);
       } catch (error) {
-        toast.error('Oops... something went wrong.', { id: 'error' });
+        toast.error('Oops... Something went wrong.', { id: 'error' });
       }
     };
     getMovie();
@@ -63,6 +63,7 @@ const MovieDetailsPage = () => {
         <NavLink to="cast" className={buildLinkClass}>
           Cast
         </NavLink>
+
         <NavLink to="reviews" className={buildLinkClass}>
           Reviews
         </NavLink>
@@ -73,8 +74,6 @@ const MovieDetailsPage = () => {
           <Outlet />
         </Suspense>
       </div>
-
-      <Toaster />
     </div>
   );
 };

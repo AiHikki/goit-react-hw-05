@@ -2,7 +2,7 @@ import MoviesListItem from '../MoviesListItem/MoviesListItem';
 import { Link, useLocation } from 'react-router-dom';
 import c from './MovieList.module.css';
 import { useSelector } from 'react-redux';
-import { selectMovies } from '../../redux/moviesSlice';
+import { selectMovies } from '../../redux/movies/selectors';
 
 const MovieList = () => {
   const location = useLocation();

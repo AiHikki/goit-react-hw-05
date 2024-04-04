@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchMovieById, fetchMovies } from './moviesOps';
+import { fetchMovieById, fetchMovies } from './operations';
 
 const handlePending = state => {
   state.loading = true;
-  state.error = false;
 };
 const handleRejected = state => {
   state.loading = false;
-  state.error = true;
 };
 
 const slice = createSlice({
@@ -15,7 +13,6 @@ const slice = createSlice({
   initialState: {
     items: [],
     loading: false,
-    error: false,
   },
   extraReducers: builder => {
     builder
@@ -37,7 +34,3 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-
-export const selectMovies = state => state.movies.items;
-export const selectLoading = state => state.movies.loading;
-export const selectError = state => state.movies.error;
