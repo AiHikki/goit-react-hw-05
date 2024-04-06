@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import c from './Header.module.css';
+import 'animate.css';
 
 const Header = ({ children }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -20,7 +21,13 @@ const Header = ({ children }) => {
     };
   }, [prevScrollPos]);
 
-  return <header className={clsx(c.header, !visible && c.hidden)}>{children}</header>;
+  return (
+    <header
+      className={clsx(c.header, !visible && c.hidden, 'animate__animated', 'animate__slideInDown')}
+    >
+      {children}
+    </header>
+  );
 };
 
 export default Header;

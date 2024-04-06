@@ -8,7 +8,8 @@ import c from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { fetchMovieById } from '../../redux/movies/operations';
-import PageLoader from '../../components/PageLoader/PageLoader';
+import Loader from '../../components/Loader/Loader';
+import 'animate.css';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(c.link, isActive && c.isActive);
@@ -20,6 +21,13 @@ const MovieDetailsPage = () => {
   const backLinkRef = useRef(location.state ?? '/');
   const [movie, setMovie] = useState(null);
   const dispatch = useDispatch();
+
+  // const navRef = useRef(null);
+
+  // const handleScroll = () => {
+  //   if (!navRef.current) return;
+  //   navRef.current.scrollIntoView({ behavior: 'smooth' });
+  // };
 
   useEffect(() => {
     const getMovie = async () => {
@@ -37,10 +45,10 @@ const MovieDetailsPage = () => {
     <div>
       <BackLink to={backLinkRef.current} />
       <div className={c.movieInfoContainer}>
-        <div className={c.poster}>
+        <div className={clsx(c.poster, 'animate__animated', 'animate__slideInLeft')}>
           <img src={createImgURL(movie?.poster_path)} alt={`${movie?.title} poster`} />
         </div>
-        <div className={c.movieDesc}>
+        <div className={clsx(c.movieDesc, 'animate__animated', 'animate__slideInRight')}>
           <p className={c.title}>{movie?.title}</p>
           <p className={c.overview}>{movie?.overview}</p>
           <div className={c.genres}>
@@ -70,7 +78,7 @@ const MovieDetailsPage = () => {
       </nav>
 
       <div>
-        <Suspense fallback={<PageLoader />}>
+        <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
       </div>

@@ -2,7 +2,7 @@
   width: 100%;
   margin-bottom: 48px;
 }
-.label {
+.wrapper {
   position: relative;
 }
 .searchInput {
@@ -15,14 +15,17 @@
   font-size: 16px;
   transition: border-color var(--duration) var(--transition-function);
 }
-.searchIcon {
+.searchBtn {
+  line-height: 0;
+  background-color: transparent;
+  border: none;
   position: absolute;
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--white);
-  line-height: 0;
 }
+
 .searchInput:focus {
   border-color: var(--red);
 }

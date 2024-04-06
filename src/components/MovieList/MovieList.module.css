@@ -1,6 +1,7 @@
 .listItem {
   overflow: hidden;
 }
+
 @media (max-width: 767px) {
   .listItem {
     width: 100%;

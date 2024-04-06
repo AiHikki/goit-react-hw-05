@@ -4,13 +4,16 @@ import toast from 'react-hot-toast';
 import { createImgURL, formatDate } from '../../utils';
 import StarRate from '../StarRate/StarRate';
 import c from './MovieReviews.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovieById } from '../../redux/movies/operations';
+import { selectLoading } from '../../redux/movies/selectors';
+import 'animate.css';
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
   const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     const getMovieCredits = async () => {
@@ -24,8 +27,8 @@ const MovieReviews = () => {
     getMovieCredits();
   }, [dispatch, movieId]);
   return (
-    <div>
-      {reviews?.length > 0 ? (
+    <div className="animate__animated animate__slideInLeft">
+      {reviews?.length > 0 && (
         <ul>
           {reviews?.map(
             ({
@@ -58,9 +61,8 @@ const MovieReviews = () => {
             )
           )}
         </ul>
-      ) : (
-        <div>There aren&apos;t any reviews yet.</div>
       )}
+      {reviews?.length === 0 && !loading && <div>There aren&apos;t any reviews yet.</div>}
     </div>
   );
 };

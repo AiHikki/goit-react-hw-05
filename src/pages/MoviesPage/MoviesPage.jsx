@@ -3,14 +3,19 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import MovieList from '../../components/MovieList/MovieList';
 import { useSearchParams } from 'react-router-dom';
 import c from './MoviesPage.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies } from '../../redux/movies/operations';
 import toast from 'react-hot-toast';
+import 'animate.css';
+import clsx from 'clsx';
+import Loader from '../../components/Loader/Loader';
+import { selectLoading } from '../../redux/movies/selectors';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  // const loading = useSelector(selectLoading);
+
+  const loading = useSelector(selectLoading);
 
   const query = searchParams.get('query') ?? '';
 
@@ -22,13 +27,13 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <p className={c.text}>
+      <p className={clsx(c.text, 'animate__animated', 'animate__slideInLeft')}>
         Discover your next movie with ease at <span className={c.logo}>MoviePulse</span>. Browse
         thousands of titles, from blockbusters to classics, with detailed descriptions and ratings.
         Start exploring now!
       </p>
       <SearchBox />
-      {/* {loading && query && <Loader />} */}
+      {loading && query && <Loader />}
       <MovieList />
     </div>
   );
